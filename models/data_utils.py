@@ -1,14 +1,13 @@
 import h5py
 import numpy as np
-import matplotlib.pyplot as plt
 
 
 def load_data():
-    train_dataset = h5py.File('datasets/train_catvnoncat.h5', "r")
+    train_dataset = h5py.File('../datasets/train_catvnoncat.h5', "r")
     train_set_x_orig = np.array(train_dataset["train_set_x"][:]) # your train set features
     train_set_y_orig = np.array(train_dataset["train_set_y"][:]) # your train set labels
 
-    test_dataset = h5py.File('datasets/test_catvnoncat.h5', "r")
+    test_dataset = h5py.File('../datasets/test_catvnoncat.h5', "r")
     test_set_x_orig = np.array(test_dataset["test_set_x"][:]) # your test set features
     test_set_y_orig = np.array(test_dataset["test_set_y"][:]) # your test set labels
 
@@ -20,9 +19,14 @@ def load_data():
     return train_set_x_orig, train_set_y_orig, test_set_x_orig, test_set_y_orig, classes
 
 
-def plot_costs(costs, learning_rate):
-    plt.plot(np.squeeze(costs))
-    plt.ylabel('cost')
-    plt.xlabel('iterations (per dozens)')
-    plt.title("Learning rate =" + str(learning_rate))
-    plt.show()
+def load_reshaped_data():
+    train_x_orig, train_y_orig, test_x_orig, test_y_orig, classes = load_data()
+    train_x_flatten = train_x_orig.reshape(train_x_orig.shape[0], -1).T
+    train_x = train_x_flatten / 255
+    train_y = train_y_orig
+
+    test_x_flatten = test_x_orig.reshape(test_x_orig.shape[0], -1).T
+    test_x = test_x_flatten / 255
+    test_y = test_y_orig
+
+    return train_x, train_y, test_x, test_y
