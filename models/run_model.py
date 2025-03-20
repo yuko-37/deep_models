@@ -43,7 +43,7 @@ def label(rate, dims):
 
 
 def file_from_dims(layers_dims):
-    filename = ('../parameters/model-' + str(layers_dims).replace('(', '')
+    filename = ('parameters/model-' + str(layers_dims).replace('(', '')
                 .replace(')', '').replace(', ', '-') + '.pkl')
     return filename
 
@@ -125,7 +125,7 @@ def recognize_image_array(img_array, parameters_filename):
 
 
 def img_array_from_img(image_file):
-    filename = "../images/" + image_file
+    filename = "images/" + image_file
     img = Image.open(filename)
     if filename.endswith(('.jpg', '.jpeg')):
         img = img.resize((64, 64))
@@ -150,7 +150,7 @@ if __name__ == '__main__':
     # img_array = random_train_cat()
     # recognize_image_array(img_array, file_from_dims(layers_dimensions))
 
-    # recognize_image('cat-0.jpg', file_from_dims(layers_dimensions))
+    recognize_image('cat-0.jpg', file_from_dims(layers_dimensions))
     # recognize_image('cat-ara.jpeg', file_from_dims(layers_dimensions))
     # recognize_image('cat-test-2.png', file_from_dims(layers_dimensions))
 
