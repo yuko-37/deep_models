@@ -34,6 +34,7 @@ def model(X, Y, learning_rate=0.3, num_iterations=30_000, printCost=True, lambd=
 
     return parameters, costs
 
+
 def initialize_parameters(ldims):
     np.random.seed(3)
     parameters = {}
