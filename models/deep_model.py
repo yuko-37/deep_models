@@ -109,7 +109,6 @@ def forward(A_prev, W, b, activation):
     else:
         raise Exception(f"Unknown activation [{activation}]")
 
-
     assert(A.shape == (W.shape[0], A_prev.shape[1]))
     cache = (Z, A_prev, W, b)
 

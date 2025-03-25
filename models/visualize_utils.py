@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import colorsys
 
+
 def plot_one(costs, title):
     plt.plot(costs)
     plt.ylabel('cost')
