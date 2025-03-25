@@ -16,7 +16,8 @@ def plot_decision_boundary(predict_lambda, X, Y):
     h = 0.05
     x1, x2 = np.meshgrid(np.arange(x1_min, x1_max, h), np.arange(x2_min, x2_max, h))
     X_grid = np.c_[x1.ravel(), x2.ravel()].T
-    print(X_grid.shape)
+
+    # print(X_grid.shape)
     assert(X_grid.shape[0] == 2)
 
     z = predict_lambda(X_grid)

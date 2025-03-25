@@ -3,13 +3,14 @@ import math
 
 
 def model(X, Y, layers_dims, optimizer, num_iterations=5000, mini_batch_size=64, learning_rate=0.0007,
-          beta=0.9, beta1=0.9, beta2=0.999, epsilon=1e-8, print_cost=True):
+          beta=0.9, beta1=0.9, beta2=0.999, epsilon=1e-8, print_cost=True, decay=None, decay_rate=1):
     m = X.shape[1]
     seed = 10
     parameters = initialize_parameters(layers_dims)
     costs = []
     t = 0
     v, s = initialize_v_s(parameters)
+    learning_rate0 = learning_rate
 
     for i in range(num_iterations):
         cost = 0
@@ -24,14 +25,24 @@ def model(X, Y, layers_dims, optimizer, num_iterations=5000, mini_batch_size=64,
             parameters, v, s = update_parameters(parameters, grads, optimizer, learning_rate,
                                            v, s, t, beta, beta1, beta2, epsilon)
 
+        if decay:
+            learning_rate = decay(learning_rate0, decay_rate, i)
+
         cost = cost / m
 
         if (i % 1000 == 0 or i == num_iterations-1) and print_cost:
             print(f"Cost after {i} iteration: {cost}")
+            if decay:
+                print(f"Learning rate after epoch {i}: {learning_rate}")
         if (i % 100 == 0) or i == num_iterations-1:
             costs.append(cost)
 
     return parameters, costs
+
+
+def schedule_lr(learning_rate0, decay_rate, epoch_num):
+    learning_rate = 1 / (1 + decay_rate * math.floor(epoch_num / 1000)) * learning_rate0
+    return learning_rate
 
 
 def update_parameters(parameters, grads, optimizer, learning_rate, v, s, t, beta, beta1, beta2, epsilon):
