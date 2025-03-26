@@ -2,9 +2,11 @@ name: deep
 channels:
   - defaults
 dependencies:
+  - python=3.11
   - numpy
   - h5py
   - matplotlib
   - pytest
   - scipy
   - scikit-learn
+  - tensorflow
