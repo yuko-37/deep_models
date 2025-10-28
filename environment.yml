@@ -1,12 +1,15 @@
 name: deep
 channels:
+  - conda-forge
   - defaults
 dependencies:
   - python=3.11
+  - pip
   - numpy
+  - jupyterlab
   - h5py
   - matplotlib
   - pytest
   - scipy
   - scikit-learn
-  - tensorflow
+  - tensorflow=2.20
