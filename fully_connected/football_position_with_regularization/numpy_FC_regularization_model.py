@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def model(X, Y, learning_rate=0.3, num_iterations=30_000, printCost=True, lambd=0, keep_probs=1):
+def model(X, Y, learning_rate=0.3, num_iterations=10_000, lambd=0, keep_probs=1):
     costs = []
     layers_dims = (X.shape[0], 20, 3, 1)
     parameters = initialize_parameters(layers_dims)
@@ -24,12 +24,13 @@ def model(X, Y, learning_rate=0.3, num_iterations=30_000, printCost=True, lambd=
 
         parameters = update_parameters(parameters, grads, learning_rate)
 
-        if (i % 1000 == 0) or (i == num_iterations - 1):
+        if (i % 1_000 == 0) or (i == num_iterations - 1):
             if lambd == 0:
                 cost = cost_compute(A3, Y)
             else:
                 cost = cost_compute_with_lambd(A3, Y, parameters, lambd)
-            print(f"Cost after {i} iteration {cost}.")
+            if i == num_iterations - 1:
+                print(f"Cost after {i} iteration {cost}.")
             costs.append(cost)
 
     return parameters, costs
@@ -181,8 +182,8 @@ def cost_compute(AL, Y):
     # cost = -1 * np.sum(np.multiply(Y, np.log(AL)) + np.multiply((1-Y), np.log(1-AL)), axis=1, keepdims=True) / m
     # cost = np.squeeze(cost)
 
-    cost = np.multiply(-np.log(AL), Y) + np.multiply(-np.log(1-AL), 1-Y)
-    cost = np.nansum(cost) / m
+    cost = np.multiply(-np.log(AL+1e-9), Y) + np.multiply(-np.log(1-AL+1e-9), 1-Y)
+    cost = np.sum(cost) / m
     return cost
 
 
