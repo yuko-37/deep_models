@@ -2,8 +2,8 @@ import numpy as np
 import random
 
 from utils.data_utils import load_reshaped_data, load_data
-from fully_connected.cat_recognition.numpy_FC_model import L_layers_model, L_model_forward
-from utils.visualize_utils import *
+from numpy_FC_model import L_layers_model, L_model_forward
+from visualize_utils import *
 from PIL import Image
 from utils.save_load_parameters import load_from, save_to
 
@@ -144,7 +144,7 @@ def recognize_image(image_file, parameters_filename):
 
 if __name__ == '__main__':
     layers_dimensions = (12288, 20, 10, 7, 5, 1)
-    # train(layers_dimensions)
+    train(layers_dimensions)
 
     recognize_image('ovcharka.jpeg', file_from_dims(layers_dimensions))
     recognize_image('cat-ara.jpg', file_from_dims(layers_dimensions))
