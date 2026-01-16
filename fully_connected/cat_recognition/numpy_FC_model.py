@@ -76,8 +76,8 @@ def update_parameters(parameters, grads, learning_rate):
 
 def L_model_forward(X, parameters):
     A = X
-    L = len(parameters) // 2 # потому что пары W1,b1, ..., WL,bL
-    caches = [] # cache[i] - это кэш i-го уровня (Zi, Ai-1, Wi, bi)
+    L = len(parameters) // 2 # pairs W1,b1, ..., WL,bL
+    caches = [] # cache[i] - (Zi, Ai-1, Wi, bi)
     caches.append(()) # cache[0] пустой
 
     for i in range(1, L):
@@ -162,15 +162,3 @@ def L_model_backward(AL, Y, caches):
         grads['db' + str(l)] = db
 
     return grads
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,11 +1,11 @@
 import numpy as np
 import random
 
-from data_utils import load_reshaped_data, load_data
-from deep_model import L_layers_model, L_model_forward
-from visualize_utils import *
+from utils.data_utils import load_reshaped_data, load_data
+from fully_connected.cat_recognition.numpy_FC_model import L_layers_model, L_model_forward
+from utils.visualize_utils import *
 from PIL import Image
-from save_load_parameters import load_from, save_to
+from utils.save_load_parameters import load_from, save_to
 
 
 def predict(X, Y, parameters, dataset_name="", print_accuracy=True):
@@ -18,7 +18,7 @@ def predict(X, Y, parameters, dataset_name="", print_accuracy=True):
     return predictions
 
 
-def run_one(layers_dims=(12288, 20, 7, 5, 1), plot_cost=True):
+def train(layers_dims=(12288, 20, 7, 5, 1), plot_cost=True):
     np.random.seed(1)
     train_x, train_y, test_x, test_y = load_reshaped_data()
     num_iterations = 2000
@@ -48,13 +48,13 @@ def file_from_dims(layers_dims):
     return filename
 
 
-def run_many():
+def train_many_models():
     np.random.seed(1)
     train_x, train_y, test_x, test_y = load_reshaped_data()
     costs_set = []
     labels_set = []
 
-    num_iterations = 1500
+    num_iterations = 100
 
     # one
     layers_dims = (train_x.shape[0], 20, 7, 5, 1)
@@ -82,7 +82,7 @@ def run_many():
     costs_set.append(costs)
     labels_set.append(label(learning_rate, layers_dims))
 
-    # tree
+    # three
     layers_dims = (train_x.shape[0], 20, 7, 5, 1)
     learning_rate = 0.001
     print(
@@ -144,14 +144,9 @@ def recognize_image(image_file, parameters_filename):
 
 if __name__ == '__main__':
     layers_dimensions = (12288, 20, 10, 7, 5, 1)
+    # train(layers_dimensions)
 
-    # run_one(layers_dimensions)
+    recognize_image('ovcharka.jpeg', file_from_dims(layers_dimensions))
+    recognize_image('cat-ara.jpg', file_from_dims(layers_dimensions))
+    recognize_image('cat-test-2.png', file_from_dims(layers_dimensions))
 
-    # img_array = random_train_cat()
-    # recognize_image_array(img_array, file_from_dims(layers_dimensions))
-
-    recognize_image('cat-0.jpg', file_from_dims(layers_dimensions))
-    # recognize_image('cat-ara.jpeg', file_from_dims(layers_dimensions))
-    # recognize_image('cat-test-2.png', file_from_dims(layers_dimensions))
-
-    # run_many()
