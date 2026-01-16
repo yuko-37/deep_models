@@ -1,5 +1,6 @@
 import h5py
 import numpy as np
+import sklearn.datasets
 
 
 def load_data():
@@ -44,3 +45,10 @@ def load_signs_data():
     classes = np.array(train_ds["list_classes"][:])
 
     return train_x, train_y, test_x, test_y, classes
+
+
+def load_moon_dataset():
+    train_X, train_Y = sklearn.datasets.make_moons(n_samples=300, noise=.2, random_state=3)
+    train_X = train_X.T
+    train_Y = train_Y.reshape((1, train_Y.shape[0]))
+    return train_X, train_Y

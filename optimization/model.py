@@ -46,7 +46,6 @@ def schedule_lr(learning_rate0, decay_rate, epoch_num):
 
 
 def update_parameters(parameters, grads, optimizer, learning_rate, v, s, t, beta, beta1, beta2, epsilon):
-
     assert(optimizer in ['gd', 'momentum', 'adam'])
 
     if optimizer == 'gd':
@@ -276,5 +275,3 @@ def backward_propagation(AL, Y, caches):
         grads['db' + str(l)] = db
 
     return grads
-
-
