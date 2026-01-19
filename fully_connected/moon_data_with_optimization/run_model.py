@@ -1,5 +1,5 @@
 import os
-from model import model, forward_propagation, schedule_lr
+from numpy_moon_data_binary_classifier import model, forward_propagation, schedule_lr
 from utils.data_utils import load_moon_dataset
 from visualize_utils import *
 from utils.save_load_parameters import *

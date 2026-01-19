@@ -123,8 +123,8 @@ def split_by_mini_batches(X, Y, size, seed):
 
 def forward_propagation(X, parameters):
     A = X
-    L = len(parameters) // 2 # потому что пары W1,b1, ..., WL,bL
-    caches = [] # cache[i] - это кэш i-го уровня (Zi, Ai-1, Wi, bi)
+    L = len(parameters) // 2 # because pairs W1,b1, ..., WL,bL
+    caches = [] # cache[i] - (Zi, Ai-1, Wi, bi)
     caches.append(()) # cache[0] пустой
 
     for i in range(1, L):
