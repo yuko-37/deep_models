@@ -1,11 +1,40 @@
 import numpy as np
 import random
-
-from utils.data_utils import load_reshaped_data, load_data
+import h5py
 from numpy_FC_model import L_layers_model, L_model_forward
 from visualize_utils import *
 from PIL import Image
-from utils.save_load_parameters import load_from, save_to
+from save_load_parameters import load_from, save_to
+
+
+def load_reshaped_data():
+    train_x_orig, train_y_orig, test_x_orig, test_y_orig, classes = load_data()
+    train_x_flatten = train_x_orig.reshape(train_x_orig.shape[0], -1).T
+    train_x = train_x_flatten / 255
+    train_y = train_y_orig
+
+    test_x_flatten = test_x_orig.reshape(test_x_orig.shape[0], -1).T
+    test_x = test_x_flatten / 255
+    test_y = test_y_orig
+
+    return train_x, train_y, test_x, test_y
+
+
+def load_data():
+    train_dataset = h5py.File('datasets/train_catvnoncat.h5', "r")
+    train_set_x_orig = np.array(train_dataset["train_set_x"][:])  # your train set features
+    train_set_y_orig = np.array(train_dataset["train_set_y"][:])  # your train set labels
+
+    test_dataset = h5py.File('datasets/test_catvnoncat.h5', "r")
+    test_set_x_orig = np.array(test_dataset["test_set_x"][:])  # your test set features
+    test_set_y_orig = np.array(test_dataset["test_set_y"][:])  # your test set labels
+
+    classes = np.array(test_dataset["list_classes"][:])  # the list of classes
+
+    train_set_y_orig = train_set_y_orig.reshape((1, train_set_y_orig.shape[0]))
+    test_set_y_orig = test_set_y_orig.reshape((1, test_set_y_orig.shape[0]))
+
+    return train_set_x_orig, train_set_y_orig, test_set_x_orig, test_set_y_orig, classes
 
 
 def predict(X, Y, parameters, dataset_name="", print_accuracy=True):
@@ -149,4 +178,3 @@ if __name__ == '__main__':
     recognize_image('ovcharka.jpeg', file_from_dims(layers_dimensions))
     recognize_image('cat-ara.jpg', file_from_dims(layers_dimensions))
     recognize_image('cat-test-2.png', file_from_dims(layers_dimensions))
-

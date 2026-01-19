@@ -1,8 +1,15 @@
 import os
+import sklearn.datasets
 from numpy_moon_data_binary_classifier import model, forward_propagation, schedule_lr
-from utils.data_utils import load_moon_dataset
 from visualize_utils import *
-from utils.save_load_parameters import *
+from save_load_parameters import *
+
+
+def load_moon_dataset():
+    train_X, train_Y = sklearn.datasets.make_moons(n_samples=300, noise=.2, random_state=3)
+    train_X = train_X.T
+    train_Y = train_Y.reshape((1, train_Y.shape[0]))
+    return train_X, train_Y
 
 
 def predict(X, Y, parameters, dataset_name="", print_accuracy=True):
