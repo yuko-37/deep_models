@@ -4,6 +4,7 @@ channels:
   - defaults
 dependencies:
   - python=3.11
+  - python-dotenv
   - pip
   - numpy
   - jupyterlab
@@ -12,4 +13,9 @@ dependencies:
   - pytest
   - scipy
   - scikit-learn
-  - tensorflow=2.20
+  - pip:
+      - tensorflow-macos #v2.16.2
+      - tensorflow-metal #v.1.2.0
+
+
+
