@@ -2,6 +2,8 @@
 temp
 *.keras
 test-env.py
+cnn/cats_dogs_inception_net_recognition/datasets
+cnn/cats_dogs_inception_net_recognition/downloaded
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
