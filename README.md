@@ -1,5 +1,8 @@
+# create conda environment
 conda env create -f environment.yml
 conda activate deep
+
+# update conda environment
 conda env update --name deep --file=./environment.yml --prune
 
 # update conda itself
