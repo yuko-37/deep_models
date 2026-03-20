@@ -8,6 +8,8 @@ The repository also explores key techniques such as dropout, regularization, and
 The goal is to explore different architectures, experiment with hyperparameters, and gain hands-on experience with deep learning concepts and techniques.
 
 ### Conda commands:
+```bash
 conda env create -f environment.yml
 conda activate deep
 conda env update --name deep --file=./environment.yml --prune
+```
